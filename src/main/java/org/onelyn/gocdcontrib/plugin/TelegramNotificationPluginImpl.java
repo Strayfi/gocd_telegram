@@ -1,4 +1,5 @@
 package org.onelyn.gocdcontrib.plugin;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.go.plugin.api.GoApplicationAccessor;
@@ -16,22 +17,17 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.onelyn.gocdcontrib.plugin.util.JSONUtils;
-import java.io.Reader;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Extension
 @SuppressWarnings("unchecked")
@@ -90,8 +86,7 @@ public class TelegramNotificationPluginImpl implements GoPlugin {
                     Files.write(Paths.get(SETTINGS_PATH), lines, StandardCharsets.UTF_8);
                 }
             }
-        } catch (IOException ignored) {
-        }
+        } catch (IOException ignored) {}
     }
 
     private GoPluginApiResponse handleNotificationsInterestedIn() {
@@ -126,21 +121,8 @@ public class TelegramNotificationPluginImpl implements GoPlugin {
             String createTimeString = (String) stageMap.get("create-time");
             String lastTransitionTimeString = (String) stageMap.get("last-transition-time");
 
-            DateTimeFormatter iso = DateTimeFormatter.ISO_INSTANT;
-            DateTimeFormatter out = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
-
-            LocalDateTime ct = null;
-            LocalDateTime lt = null;
-
-            if (createTimeString != null && !createTimeString.isEmpty()) {
-                ct = LocalDateTime.ofInstant(Instant.from(iso.parse(createTimeString)), ZoneId.systemDefault());
-            }
-            if (lastTransitionTimeString != null && !lastTransitionTimeString.isEmpty()) {
-                lt = LocalDateTime.ofInstant(Instant.from(iso.parse(lastTransitionTimeString)), ZoneId.systemDefault());
-            }
-
-            String fc = (ct != null) ? out.format(ct) : "-";
-            String fl = (lt != null) ? out.format(lt) : "-";
+            String fc = formatTimestamp(createTimeString);
+            String fl = formatTimestamp(lastTransitionTimeString);
 
             String currentPipelineResult = fetchPipelineResult(gocdApiUrl, gocdApiToken, pipelineName, currentCounter);
             String prevPipelineResult = "N/A";
@@ -292,8 +274,7 @@ public class TelegramNotificationPluginImpl implements GoPlugin {
                     r.put("gocd_api_token", line.substring("gocd_api_token=".length()));
                 }
             }
-        } catch (IOException ignored) {
-        }
+        } catch (IOException ignored) {}
         return r;
     }
 
@@ -315,5 +296,15 @@ public class TelegramNotificationPluginImpl implements GoPlugin {
                 return json;
             }
         };
+    }
+
+    private String formatTimestamp(String timestamp) {
+        if (timestamp == null || timestamp.isEmpty()) {
+            return "-";
+        }
+        Instant instant = Instant.parse(timestamp);
+        return DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
+                                .withZone(ZoneOffset.UTC)
+                                .format(instant);
     }
 }
