@@ -1,0 +1,95 @@
+{
+    "dependencies": [
+        {
+            "moduleName": "com.google.code.gson:gson",
+            "moduleVersion": "2.9.1",
+            "moduleUrls": [
+                "https://github.com/google/gson/gson"
+            ],
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License, Version 2.0",
+                    "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "commons-codec:commons-codec",
+            "moduleVersion": "1.11",
+            "moduleUrls": [
+                "http://commons.apache.org/proper/commons-codec/"
+            ],
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License, Version 2.0",
+                    "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "commons-io:commons-io",
+            "moduleVersion": "2.11.0",
+            "moduleUrls": [
+                "https://commons.apache.org/proper/commons-io/"
+            ],
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License, Version 2.0",
+                    "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "commons-logging:commons-logging",
+            "moduleVersion": "1.2",
+            "moduleUrls": [
+                "http://commons.apache.org/proper/commons-logging/"
+            ],
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License, Version 2.0",
+                    "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "org.apache.commons:commons-lang3",
+            "moduleVersion": "3.12.0",
+            "moduleUrls": [
+                "https://commons.apache.org/proper/commons-lang/"
+            ],
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License, Version 2.0",
+                    "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "org.apache.httpcomponents:httpclient",
+            "moduleVersion": "4.5.13",
+            "moduleUrls": [
+                "http://hc.apache.org/httpcomponents-client"
+            ],
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License, Version 2.0",
+                    "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "org.apache.httpcomponents:httpcore",
+            "moduleVersion": "4.4.13",
+            "moduleUrls": [
+                "http://hc.apache.org/httpcomponents-core-ga"
+            ],
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License, Version 2.0",
+                    "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+                }
+            ]
+        }
+    ]
+}

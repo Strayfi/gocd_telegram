@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Go-Version: 24.5.0
+Plugin-Revision: 1.0.3
+Implementation-Title: gocd-telegram-notifier
+Implementation-Version: 1.0.3
+Source-Compatibility: 11
+Target-Compatibility: 11
+Git-SHA: 
+
