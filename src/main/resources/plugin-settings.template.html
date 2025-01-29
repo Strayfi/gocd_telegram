@@ -1,0 +1,10 @@
+<div class="form_item_block">
+    <label>API token:<span class="asterisk">*</span></label>
+    <input type="text" ng-model="api_token" ng-required="true"/>
+    <span class="form_error" ng-show="GOINPUTNAME[api_token].$error.server">{{ GOINPUTNAME[api_token].$error.server }}</span>
+</div>
+<div class="form_item_block">
+    <label>Chat ID:<span class="asterisk">*</span></label>
+    <input type="text" ng-model="chat_id" ng-required="true"/>
+    <span class="form_error" ng-show="GOINPUTNAME[chat_id].$error.server">{{ GOINPUTNAME[chat_id].$error.server }}</span>
+</div>

@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+}
+apply from: "https://raw.githubusercontent.com/gocd/gocd-plugin-gradle-task-helpers/master/helper.gradle?_=${(int) (new Date().toInstant().epochSecond / 60)}"
+
+gocdPlugin {
+    id = 'telegram.notifier'
+    pluginVersion = '1.0.3'
+    goCdVersion = '24.5.0'
+    name = 'Telegram notifications Plugin'
+    description = 'Plugin to send telegram notifications'
+    vendorName = 'Strayfi Lendjok'
+    vendorUrl = 'https://t.me/strayfi_lendjok'
+
+    pluginProject = project
+
+    prerelease = !"No".equalsIgnoreCase(System.getenv('PRERELEASE'))
+    assetsToRelease = [project.tasks.jar]
+}
+
+group 'org.onelyn.gocdcontrib'
+version gocdPlugin.fullVersion(project)
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+ext {
+    deps = [
+            gocdPluginApi: 'cd.go.plugin:go-plugin-api:22.2.0',
+    ]
+
+    versions = project.ext.deps.collectEntries { lib, libGav -> [lib, libGav.split(':').last()] }
+}
+
+dependencies {
+    compileOnly project.deps.gocdPluginApi
+    implementation 'com.google.code.gson:gson:2.9.1'
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    from(configurations.runtimeClasspath) {
+        into "lib/"
+    }
+
+    from(sourceSets.main.java) {
+        into "/"
+    }
+}
